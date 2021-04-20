@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  
+  front:
+    image: fullstack/frontend:0.1
+    build: ./front
+    ports:
+      - "80:80"
+
+  dockback:
+    image: fullstack/backend:0.1
+    build: ./dockback
+    ports:
+      - "5000:5000"

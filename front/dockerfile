@@ -1,0 +1,11 @@
+FROM python:3.6
+
+#Create app directory 
+WORKDIR /
+
+
+#Bundle app source
+COPY . . 
+
+EXPOSE 80
+CMD [ "python3", "serveur_http.py" ]
