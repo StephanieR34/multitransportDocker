@@ -1,10 +1,15 @@
+import os
 from flask import render_template, jsonify
 
 from back.requestsapi import *
 
 
 def entry_point():
-    return render_template('./app.html')
+    try:
+        return render_template('/app/front/templates/app.html')
+    except:
+        return jsonify(directory = os.listdir("/app/front/templates"))
+    
 
 def hello_world():
     return 'Hello Boug'

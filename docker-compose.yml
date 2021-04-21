@@ -1,15 +1,34 @@
-version: "3"
+version: '3'
 
 services:
-  
-  front:
-    image: fullstack/frontend:0.1
-    build: ./front
-    ports:
-      - "80:80"
+    reverse-proxy:
+        # Traefik v2.2 officiel
+        image: traefik:v2.2
+        ports:
+            # Ports d'écoute
+            - "80:80"
+            # Dashboard
+            - "8080:8080"
+        volumes:
+            # Mapping de la configuration statique
+            - ./traefik.yml:/etc/traefik/traefik.yml
+            # Mapping du dossier de conf dynamique
+            - ./dyn_traefik/:/etc/dyn_traefik/
+            # Pour que traefik puisse écouter les events Docker
+            - /var/run/docker.sock:/var/run/docker.sock
+    front:
+        image: fullstack/frontend:0.1
+        build: ./front
+        labels:
+            - traefik.enable=true
+            - traefik.port=80
+            - traefik.http.routers.front.rule=Host(`multitransports.com`)
 
-  dockback:
-    image: fullstack/backend:0.1
-    build: ./dockback
-    ports:
-      - "5000:5000"
+    back:
+        image: fullstack/backend:0.1
+        build: .
+        labels:
+            - traefik.enable=true
+            - traefik.port=80
+            - traefik.http.routers.backend.rule=Host(`backend.multitransports.com`)
+
