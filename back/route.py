@@ -6,7 +6,7 @@ from back.requestsapi import *
 
 def entry_point():
     try:
-        return render_template('/app/front/templates/app.html')
+        return render_template('/app.html')
     except:
         return jsonify(directory = os.listdir("/app/front/templates"))
     

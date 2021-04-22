@@ -2,10 +2,10 @@ const btnm = document.getElementById('button_montpellier');
 const btnr = document.getElementById('button_rennes');
 const search = document.getElementById('search');
 const matchlist = document.getElementById('result');
-var url = "http://localhost:5000/Montpellier/stations"
+var url = "http://backend.multitransports.com/Montpellier/stations"
 const selectCity = selectedcity => {
-    url = "http://localhost:5000/"+selectedcity+"/stations"
-    return "http://localhost:5000/"+selectedcity+"/stations"
+    url = "http://backend.multitransports.com/"+selectedcity+"/stations"
+    return "http://backend.multitransports.com/"+selectedcity+"/stations"
     };
 
 const searchStation = async (searchText, url) => {
